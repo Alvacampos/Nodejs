@@ -26,8 +26,7 @@ let addNote = (title, body) => {
     notes.push(note);
     saveNotes(notes);
     return note
-  }
-    
+  }    
 };
 let getAll = () => {
   let notes = fetchNotes();

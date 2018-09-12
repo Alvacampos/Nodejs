@@ -5,18 +5,44 @@ const yargs = require('yargs');
 //Modules
 const notes = require('./notes.js');
 
-const argv = yargs.argv;
+const title = {
+  describe: 'Title of note',
+  demand: true,
+  alias: 't'
+};
+const body = {
+  describe: 'Body of note',
+  demand: true,
+  alias: 'b'
+};
+const argv = yargs
+  .command('add', 'Add a new note', {
+    title,
+    body 
+  })
+  .command('remove', 'Delete note', {
+    title
+  })
+  .command('list', 'List all the notes', {
+  })
+  .command('read', 'Read a note', {
+    title
+  })
+  .help()
+  .argv;
 let command = argv._[0];
-console.log(`Command: ${command}`);
-//console.log('Yargs: ', argv);
+
 
 /* ---- Functionality --- */
+let Msg = (note) => {
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);
+};
 let addMessage = note => {
   if (note){
     console.log('Note created');
     console.log('----');
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);
+    Msg(note);
   }else{
     console.log('Note already in the system');
   }
@@ -32,8 +58,7 @@ let listMassage = note => {
   console.log('Note List');
   console.log('----');
   note.forEach( curr => {
-    console.log(`Title: ${curr.title}`);
-    console.log(`Body: ${curr.body}`);
+    Msg(curr);
     console.log('----');
   });
 };
@@ -41,8 +66,7 @@ let readMessage = note => {
   if (note){
     console.log('Note Read');
     console.log('----');
-    console.log(`Title: ${note.title}`);
-    console.log(`Body: ${note.body}`);
+    Msg(note);
   }else{
     console.log('Note couldn´t be found in the system');
   }
