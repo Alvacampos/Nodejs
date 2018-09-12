@@ -32,7 +32,6 @@ const argv = yargs
   .argv;
 let command = argv._[0];
 
-
 /* ---- Functionality --- */
 let Msg = (note) => {
   console.log(`Title: ${note.title}`);
